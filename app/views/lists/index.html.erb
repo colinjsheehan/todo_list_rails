@@ -1,0 +1,59 @@
+<table class="table table-bordered">
+  <tbody>
+    <% @lists.each do |list| %>
+    
+    <% if list.completed %>
+      <tr class="bg-primary">
+
+        <td class="strike_thru"><p class='text-light' <%= link_to list.description, edit_list_path(list) %><% list.description %></td></p>
+        <td>
+            
+            <%= form_for(list) do |f| %>
+            <%= f.text_field :description, type: 'hidden' %>
+            <%= f.check_box :completed, :checked => false, :style => 'visibility: hidden' %>
+            <%= f.submit  "UnCheck", class: 'btn btn-outline-secondary btn-sm' %>
+            <% end %>
+     
+        </td>
+        <td>
+          <% link_to 'Show', list %>                      
+          <%link_to 'Edit', edit_list_path(list) %>
+          <center> <%= link_to 'Delete', list, method: :delete, data: { confirm: 'Are you sure?' } %></center>
+        </td>
+        
+      </tr>
+      <% else %>
+        <tr>
+        <td> <%= link_to list.description, edit_list_path(list) %><% list.description %></td>
+        <td>
+            <%= form_for(list) do |f| %>
+            <%= f.text_field :description, type: 'hidden' %>
+            <%= f.check_box :completed, :checked => true, :style => 'visibility: hidden' %>
+            <%= f.submit  "Check", class: 'btn btn-outline-secondary  btn-sm' %>
+            <% end %>
+        
+        
+        </td>
+        <td>
+ <!-- '=' means printed to the page -->
+            <% link_to 'Show', list %>
+            <% link_to 'Edit', edit_list_path(list) %>
+            <center> <%= link_to 'Delete', list, method: :delete, data: { confirm: 'Are you sure?' } %></center>
+          </td>
+        </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br/>
+
+<% link_to 'Add item', new_list_path, class: 'btn btn-success' %>
+
+
+<br/>
+<br/>
+
+<%= link_to 'Delete Marked Items', home_remove_deleted_path, class: 'btn btn-warning', data: { confirm: 'Are you sure?' }%>
+
+<%= link_to 'Delete All', home_remove_all_path, class: 'btn btn-danger', data: { confirm: 'Are you sure?' }%>

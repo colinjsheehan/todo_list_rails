@@ -1,0 +1,14 @@
+<h1>Edit Task</h1>
+</br>
+<!--render is a 'partial' that allows you to pull something from another page onto this page-->
+<!--A Partial starts with a '_'-->
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+     <%= render 'form' %>  
+  </div>
+</div>
+          
+<br/> <br/>
+<% link_to 'Show', @list %> 
+<%= link_to 'Back', lists_path %>
