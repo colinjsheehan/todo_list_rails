@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'homes/show'
+
   resources :lists
   root 'lists#index' 
   get 'home/remove_deleted'
